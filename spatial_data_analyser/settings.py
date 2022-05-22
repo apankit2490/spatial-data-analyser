@@ -9,23 +9,20 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-from os.path import dirname, abspath, basename
-from decouple import config
+from os.path import dirname, abspath, basename, join
+from pathlib import Path
+
+from decouple import config, Csv
 from dj_database_url import parse as db_url
 
-BASE_DIR = dirname(dirname(abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# fetch the project_root
-PROJECT_ROOT = dirname(BASE_DIR)
-
-# the name of the whole site
-SITE_NAME = basename(BASE_DIR)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 SECRET_KEY = config('SECRET_KEY', 'NOT_SO_SECRET_KEY')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 
 # Application definition
 
@@ -108,8 +105,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+STATICFILES_DIRS = [
+    join(BASE_DIR, 'static'),
+]
 
-STATIC_URL = 'static/'
+# collect static files here
+STATIC_ROOT = join(BASE_DIR, 'run', 'static')
+
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
