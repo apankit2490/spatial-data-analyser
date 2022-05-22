@@ -1,0 +1,17 @@
+# Django framework
+Django==3.0.5
+
+# Serve Static content
+whitenoise==5.0.1
+
+# Import variables from .env file
+python-decouple==3.3
+
+# DRF for making REST APIs
+djangorestframework==3.11.0
+
+# Postgresql support for django
+psycopg2==2.8.5
+
+# Database and Email settings
+dj-database-url==0.5.0
