@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'leaflet',
+    'rest_framework',
     'apps.world_countries_gis'
 ]
 
@@ -118,3 +120,12 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LEAFLET_CONFIG = {
+    "DEFAULT_CENTER": (40.5, -0.09),
+    "DEFAULT_ZOOM": 1,
+    "MAX_ZOOM": 20,
+    "MIN_ZOOM": 3,
+    "SCALE": 'both',
+    "ATTRIBUTION_PREFIX": "Leaflet map"
+}

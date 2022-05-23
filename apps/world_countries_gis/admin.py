@@ -1,3 +1,10 @@
-from django.contrib import admin
+from django.contrib.gis import admin
 
-# Register your models here.
+from apps.world_countries_gis.models import WorldCountry
+from leaflet.admin import LeafletGeoAdmin
+
+
+@admin.register(WorldCountry)
+class WorldCountryAdmin(LeafletGeoAdmin):
+    pass
+

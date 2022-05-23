@@ -15,3 +15,6 @@ psycopg2==2.8.5
 
 # Database and Email settings
 dj-database-url==0.5.0
+
+# Django leaflet to enable leafletjs
+django-leaflet==0.28.2
