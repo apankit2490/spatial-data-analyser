@@ -129,3 +129,5 @@ LEAFLET_CONFIG = {
     "SCALE": 'both',
     "ATTRIBUTION_PREFIX": "Leaflet map"
 }
+
+DATAHUB_GEOJSON_URL = config('DATAHUB_GEOJSON_URL')

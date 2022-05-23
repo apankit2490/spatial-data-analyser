@@ -18,3 +18,14 @@ dj-database-url==0.5.0
 
 # Django leaflet to enable leafletjs
 django-leaflet==0.28.2
+
+# Celery to perform Heavy-lifting & Asynchronous tasks
+celery==4.4.2
+
+# Periodic Celer Task executor
+django_celery_beat==2.0.0
+
+# Deals with data-packages from datahub.io
+datapackage==1.15.2
+
+
