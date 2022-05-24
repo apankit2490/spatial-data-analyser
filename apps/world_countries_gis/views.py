@@ -26,6 +26,7 @@ class WorldCountryViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         return super(WorldCountryViewSet, self).list(request, *args, **kwargs)
 
+    @method_decorator(cache_page(settings.WORLD_INTERSECTING_COUNTRIES_LIFETIME))
     @action(detail=False, methods=['get'], url_path=r'intersecting_countries/(?P<country_code>[^/.]+)')
     def get_intersecting_countries(self, request, country_code=None):
         world_cntry_obj = WorldCountry.objects.filter(code=country_code).first()
