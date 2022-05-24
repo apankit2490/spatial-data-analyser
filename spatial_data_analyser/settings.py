@@ -15,6 +15,9 @@ from pathlib import Path
 from decouple import config, Csv
 from dj_database_url import parse as db_url
 
+# Deals with celery configurations and cron-jobs
+from spatial_data_analyser.celery_config import *
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -131,3 +134,96 @@ LEAFLET_CONFIG = {
 }
 
 DATAHUB_GEOJSON_URL = config('DATAHUB_GEOJSON_URL')
+
+# Logger config
+LOG_DIR = config('LOG_DIR', '')
+LOG_FILE = 'spatial-data-analyser.log'
+LOG_LEVEL = config('LOG_LEVEL', 'INFO')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {'format': '%(levelname)s %(asctime)s %(name)s %(message)s'}
+    },
+    'filters': {
+        'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'},
+        'require_debug_true': {'()': 'django.utils.log.RequireDebugTrue'},
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        },
+        'file': {
+            'level': LOG_LEVEL,
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'when': 'midnight',
+            'backupCount': 10,
+            'filename': join(LOG_DIR, LOG_FILE),
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': LOG_LEVEL,
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'sql': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'backupCount': 10,
+            'filename': join(LOG_DIR, 'queries.log'),
+            'filters': ['require_debug_true'],
+            'formatter': 'verbose',
+        },
+        'celery': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'backupCount': 10,
+            'filename': join(LOG_DIR, 'celery.log'),
+            'filters': ['require_debug_true'],
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'spatial-data-analyser': {
+            'handlers': ['console', 'file'],
+            'level': LOG_LEVEL,
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['sql'],
+            'propagate': False,
+        },
+        'celery': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'celery'],
+            'propagate': False,
+        },
+    },
+}
+
+# Celery Config
+CELERY_CACHE_BACKEND = 'default'
+CELERY_RESULT_BACKEND = 'rpc'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://localhost')
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+CELERY_RESULT_EXPIRES = config(
+    'CELERY_RESULT_EXPIRES', default=3 * 60 * 60 * 24, cast=int)
+
+
