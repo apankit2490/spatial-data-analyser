@@ -26,12 +26,8 @@ def update_world_countries():
         geometry_obj = feature['geometry']
         logger.info(f'Persisting/Updating data for name: {country_name}, code: {country_code}')
         logger.debug(f'Geometry object desc for country: {country_name}. \n{geometry_obj}')
-        obj, created = WorldCountry.objects.update_or_create(name=country_name, defaults={
+        WorldCountry.objects.update_or_create(name=country_name, defaults={
             'name': country_name,
             'code': country_code,
             'geometry': GEOSGeometry(json.dumps(geometry_obj))
         })
-        return {
-            'obj': list(obj),
-            'created': list(created)
-        }
