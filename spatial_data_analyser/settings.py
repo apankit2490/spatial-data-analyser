@@ -137,6 +137,7 @@ LEAFLET_CONFIG = {
 
 DATAHUB_GEOJSON_URL = config('DATAHUB_GEOJSON_URL')
 WORLD_COUNTRY_LIST_LIFETIME = config('WORLD_COUNTRY_LIST_LIFETIME', default=60 * 10, cast=int)
+WORLD_INTERSECTING_COUNTRIES_LIFETIME = config('WORLD_INTERSECTING_COUNTRIES_LIFETIME', default=60 * 60, cast=int)
 
 # Logger config
 LOG_DIR = config('LOG_DIR', '')
@@ -237,4 +238,17 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.OrderingFilter'
     ),
+}
+
+# redis settings
+REDIS_URL = config('REDIS_URL', default='redis://localhost:6379')
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
+        }
+    }
 }
