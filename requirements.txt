@@ -25,4 +25,6 @@ celery==4.4.2
 # Deals with data-packages from datahub.io
 datapackage==1.15.2
 
+# Geographic add-ons for Django Rest Framework
+djangorestframework-gis==0.15
 

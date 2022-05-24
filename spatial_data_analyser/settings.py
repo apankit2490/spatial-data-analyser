@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'leaflet',
     'rest_framework',
+    'rest_framework_gis',
     'apps.world_countries_gis'
 ]
 
@@ -134,6 +135,7 @@ LEAFLET_CONFIG = {
 }
 
 DATAHUB_GEOJSON_URL = config('DATAHUB_GEOJSON_URL')
+WORLD_COUNTRY_LIST_LIFETIME = config('WORLD_COUNTRY_LIST_LIFETIME', default=60 * 10, cast=int)
 
 # Logger config
 LOG_DIR = config('LOG_DIR', '')
@@ -225,5 +227,3 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERY_RESULT_EXPIRES = config(
     'CELERY_RESULT_EXPIRES', default=3 * 60 * 60 * 24, cast=int)
-
-
