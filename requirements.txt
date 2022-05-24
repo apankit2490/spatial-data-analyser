@@ -28,3 +28,7 @@ datapackage==1.15.2
 # Geographic add-ons for Django Rest Framework
 djangorestframework-gis==0.15
 
+# Django DRF filterset and filters add-on
+django-filter==2.3.0
+
+
