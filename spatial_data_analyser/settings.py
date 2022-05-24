@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'leaflet',
     'rest_framework',
     'rest_framework_gis',
+    'django_filters',
     'apps.world_countries_gis'
 ]
 
@@ -227,3 +228,10 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Kolkata'
 CELERY_RESULT_EXPIRES = config(
     'CELERY_RESULT_EXPIRES', default=3 * 60 * 60 * 24, cast=int)
+
+# Rest Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2,
+    
+}
