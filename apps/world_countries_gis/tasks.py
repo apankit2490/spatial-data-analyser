@@ -17,6 +17,9 @@ logger = logging.getLogger('spatial-data-analyser')
 @app.task(on_success=celery_logger_handler('Update World Countries Task Successful.', True),
           on_failure=celery_logger_handler('Update World Countries Failed.', False))
 def update_world_countries():
+    """
+    Celery task to fetch geojson data from external source and persist into dB.
+    """
     logger.info(f'Inside update_world_countries task. Performing database update using data from '
                 f'{settings.DATAHUB_GEOJSON_URL}')
     package = datapackage.Package(settings.DATAHUB_GEOJSON_URL)

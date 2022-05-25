@@ -1,9 +1,13 @@
 """
-Test utils module
+Test util module
 """
 
 
 def get_world_countries_create_payload():
+    """
+    Obtains payload for WorldCountry Model
+    :return:
+    """
     return {
         'name': 'Aruba',
         'code': 'ABW',

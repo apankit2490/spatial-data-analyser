@@ -1,3 +1,7 @@
+"""
+Celery Beat config Module
+"""
+
 from datetime import timedelta
 
 CELERY_BEAT_SCHEDULE = {

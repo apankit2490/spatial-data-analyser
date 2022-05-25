@@ -1,3 +1,6 @@
+"""
+Core celery app config Module
+"""
 import os
 
 from django.conf import settings
