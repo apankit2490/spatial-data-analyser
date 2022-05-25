@@ -193,18 +193,18 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console', 'file'],
-            'level': 'ERROR',
+            'level': 'INFO',
             'propagate': False,
         },
         'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
         },
         'spatial-data-analyser': {
             'handlers': ['console', 'file'],
             'level': LOG_LEVEL,
-            'propagate': True,
+            'propagate': False,
         },
         'django.db.backends': {
             'level': 'DEBUG',
