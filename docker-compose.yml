@@ -9,6 +9,8 @@ services:
       replicas: 2
     ports:
       - "8000:8000"
+    healthcheck:
+      test: "python manage.py test"
     env_file:
       - ./.env.docker
     depends_on:
@@ -48,7 +50,7 @@ services:
       - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
       - ./rabbitmq/logs:/var/log/rabbitmq/log
     ports:
-#       UI management tool is exposed for debugging
+      #       UI management tool is exposed for debugging
       - "15672:15672"
   redis:
     image: redis:6.2-alpine
