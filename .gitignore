@@ -332,3 +332,4 @@ pip-selfcheck.json
 
 #Adding project logs
 *spatial-data-analyser.log*
+rabbitmq
