@@ -1,0 +1,61 @@
+version: '3.3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    deploy:
+      mode: replicated
+      replicas: 2
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env.docker
+    depends_on:
+      - postgisdb
+      - rabbitmq
+      - redis
+  celery_worker:
+    build: .
+    command: celery worker --app=spatial_data_analyser.celery_app -l info
+    env_file:
+      - ./.env.docker
+  celery_beat:
+    build: .
+    command: celery beat --app=spatial_data_analyser.celery_app -l info
+    env_file:
+      - ./.env.docker
+  postgisdb:
+    image: kartoza/postgis:14-3.2
+    volumes:
+      - postgis-data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=pixxel
+      - POSTGRES_PASSWORD=4zZ3Cb&V96!ZX9fu
+      - POSTGRES_DBNAME=spatial_database
+    restart: on-failure
+    healthcheck:
+      test: "exit 0"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=pixxel
+      - RABBITMQ_DEFAULT_PASS=56zZ3Cb&V96!ZX9fu
+    volumes:
+      - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+      - ./rabbitmq/logs:/var/log/rabbitmq/log
+    ports:
+#       UI management tool is exposed for debugging
+      - "15672:15672"
+  redis:
+    image: redis:6.2-alpine
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgis-data:
+  redis_data:
