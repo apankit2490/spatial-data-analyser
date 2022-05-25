@@ -252,3 +252,7 @@ CACHES = {
         }
     }
 }
+
+FIXTURE_DIRS = (
+    join(BASE_DIR, 'fixtures/'),
+)
