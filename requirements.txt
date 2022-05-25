@@ -34,4 +34,7 @@ django-filter==2.3.0
 #django redis
 django-redis==4.12.1
 
+# Gunicorn advanced server
+gunicorn==20.0.4
+
 

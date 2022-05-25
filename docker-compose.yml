@@ -3,7 +3,7 @@ version: '3.3'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn --bind :8000 spatial_data_analyser.wsgi
     deploy:
       mode: replicated
       replicas: 2
