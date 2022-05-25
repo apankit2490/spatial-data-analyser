@@ -6,5 +6,7 @@ from leaflet.admin import LeafletGeoAdmin
 
 @admin.register(WorldCountry)
 class WorldCountryAdmin(LeafletGeoAdmin):
-    pass
+    list_display = ('id', 'name', 'code',)
+    list_display_links = ('id', 'name')
+    search_fields = ('id', 'name', 'code')
 
