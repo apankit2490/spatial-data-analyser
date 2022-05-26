@@ -161,7 +161,7 @@ docker build -t ankitpatnaik/spatial-data-analyser .
 To create a running container do:
 
 ```shell
-docker run --name "spatial_data_analyser" -p 8000:8000 -d -t ankitpatnaik/spatial-data-analyser
+docker run --name "spatial_data_analyser" -p 8143:8000 -d -t ankitpatnaik/spatial-data-analyser
 ```
 
 ## Convenience docker-compose
@@ -169,7 +169,7 @@ docker run --name "spatial_data_analyser" -p 8000:8000 -d -t ankitpatnaik/spatia
 For convenience, a ``docker-compose.yml`` is designed to run the whole application along with its dependent services *(
 redis, postgis, etc...)* with no pre-configuration needed on the host machine.
 
-The docker compose recipe will expose application on port 8000.
+The docker compose recipe will expose application on port 8143.
 
 The docker-compose is so designed to run the django tests and fire-up all services only if they are successful.
 

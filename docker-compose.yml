@@ -8,7 +8,7 @@ services:
       mode: replicated
       replicas: 2
     ports:
-      - "8000:8000"
+      - "8143:8000"
     healthcheck:
       test: "python manage.py test"
     env_file:
