@@ -19,6 +19,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('health/', include('health_check.urls')),
     path('v1/', include('apps.world_countries_gis.urls')),
 ]
 

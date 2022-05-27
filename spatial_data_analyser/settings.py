@@ -41,6 +41,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'django_filters',
+    'health_check',
+    'health_check.db',
+    'health_check.contrib.migrations',
+    'health_check.contrib.celery',
+    'health_check.contrib.celery_ping',
+    'health_check.contrib.rabbitmq',
+    'health_check.contrib.redis',
     'apps.world_countries_gis'
 ]
 
@@ -223,6 +230,7 @@ LOGGING = {
 CELERY_CACHE_BACKEND = 'default'
 CELERY_RESULT_BACKEND = 'rpc'
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://localhost')
+BROKER_URL = CELERY_BROKER_URL
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

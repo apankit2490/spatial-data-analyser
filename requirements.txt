@@ -37,4 +37,8 @@ django-redis==4.12.1
 # Gunicorn advanced server
 gunicorn==20.0.4
 
+# Run checks on services like dB, queue servers, celery etc.
+django-health-check==3.16.5
+
+
 
