@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'django_filters',
+    'drf_yasg',
     'health_check',
     'health_check.db',
     'health_check.contrib.migrations',

@@ -1,6 +1,6 @@
 # Geo-Spatial Data Analyser
 
-A Django based spacial data analysing project that deals with curating Geodata as geojson polygons for all the world's
+A Django based spatial data analysing project that deals with curating Geodata as geojson polygons for all the
 countries, being updated in real-time and querying geo-spacial data.
 
 [![Contributors][contributors-shield]][contributors-url]
@@ -61,6 +61,18 @@ Features:
 * [VirtualEnv](https://pypi.org/project/virtualenv/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## Swagger & ReDoc
+
+Both swagger and Redoc have been configured to view and try the APIs.
+They can be accessed at: 
+
+```
+Swagger - http://www.localhost.com:8143/swagger
+Redoc - http://www.localhost.com:8143/redoc
+```
 
 <!-- GETTING STARTED -->
 
