@@ -7,7 +7,10 @@ services:
     ports:
       - "8143:8000"
     healthcheck:
-      test: "python manage.py test"
+      test: "python manage.py test --no-input && curl -f http://localhost:8000/health"
+      interval: 30s
+      timeout: 10s
+      retries: 5
     env_file:
       - ./.env.docker
     depends_on:
@@ -16,10 +19,14 @@ services:
       - redis
   celery_worker:
     build: .
+    depends_on:
+      - web
     command: celery worker --app=spatial_data_analyser.celery_app -l info
     env_file:
       - ./.env.docker
   celery_beat:
+    depends_on:
+      - web
     build: .
     command: celery beat --app=spatial_data_analyser.celery_app -l info
     env_file:
