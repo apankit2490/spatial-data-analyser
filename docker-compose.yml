@@ -4,9 +4,6 @@ services:
   web:
     build: .
     command: gunicorn --bind :8000 spatial_data_analyser.wsgi
-    deploy:
-      mode: replicated
-      replicas: 2
     ports:
       - "8143:8000"
     healthcheck:
